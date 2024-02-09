@@ -1,12 +1,12 @@
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { User, UserDocument } from './entities/user.entity';
-import * as bcrypt from 'bcrypt';
-import { SignUpDto } from './dto/user.dto';
 import { JwtService } from '@nestjs/jwt';
+import { InjectModel } from '@nestjs/mongoose';
+import * as bcrypt from 'bcrypt';
+import { Model } from 'mongoose';
 import { RedisService } from 'src/redis/redis.service';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { SignUpDto } from './dto/user.dto';
+import { User, UserDocument } from './entities/user.entity';
 
 export function hash(value: string, saltOrRounds: number | string): string {
   return bcrypt.hashSync(value, saltOrRounds);
@@ -34,6 +34,7 @@ export class UsersService {
   async signUp(userData: SignUpDto) {
     const hashedPassword = hash(userData.password, 12);
     userData.password = hashedPassword;
+
     return this.userModel.create(userData);
   }
 

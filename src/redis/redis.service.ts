@@ -1,16 +1,16 @@
 import { ConfigService } from '@nestjs/config';
 import {
-  createClient,
-  RedisModules,
-  RedisFunctions,
-  RedisScripts,
   RedisClientType,
+  RedisFunctions,
+  RedisModules,
+  RedisScripts,
+  createClient,
 } from 'redis';
 
 export class RedisService {
   private client: RedisClientType<RedisModules, RedisFunctions, RedisScripts>;
 
-  constructor(private redisConfig: ConfigService) {
+  constructor(private configService: ConfigService) {
     this.client = createClient({
       socket: {
         host: process.env.REDIS_HOST,

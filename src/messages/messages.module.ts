@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { WorkspaceSchema } from 'src/workspaces/entities/workspace.entity';
 import { MessageSchema } from './entities/message.entity';
@@ -11,6 +12,7 @@ import { MessagesService } from './messages.service';
       { name: 'Message', schema: MessageSchema },
       { name: 'Workspace', schema: WorkspaceSchema },
     ]),
+    JwtModule,
   ],
   controllers: [MessagesController],
   providers: [MessagesService],

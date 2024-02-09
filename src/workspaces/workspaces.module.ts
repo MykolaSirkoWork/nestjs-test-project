@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
-import { WorkspacesService } from './workspaces.service';
-import { WorkspacesController } from './workspaces.controller';
+import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Workspace, WorkspaceSchema } from './entities/workspace.entity';
 import { User, UserSchema } from 'src/users/entities/user.entity';
+import { Workspace, WorkspaceSchema } from './entities/workspace.entity';
+import { WorkspacesController } from './workspaces.controller';
+import { WorkspacesService } from './workspaces.service';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { User, UserSchema } from 'src/users/entities/user.entity';
       { name: Workspace.name, schema: WorkspaceSchema },
       { name: User.name, schema: UserSchema },
     ]),
+    JwtModule,
   ],
   controllers: [WorkspacesController],
   providers: [WorkspacesService],
